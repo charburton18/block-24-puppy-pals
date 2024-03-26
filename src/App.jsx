@@ -1,24 +1,31 @@
+import './App.css'
 import {useState} from 'react'
 import puppyList from './data.js';
-// import './App.css'
 
 function App() {
   const [puppies, setPuppies] = useState(puppyList);
   const [featPupId, setFeatPupId] = useState(null);
-
-// function handleClick() {
-//   // logic
-// }
+  const featuredPup = puppies.find((pup)=> pup.id === featPupId);
+  console.log(featuredPup);
 
   return (
     <>
       <div id="root" className="App">
+        {featPupId && 
+          <div>
+            <h2 class="puppyNames">{featuredPup.name}</h2>
+            <ul class="puppyNames">
+              <li class="puppyNames">Age: {featuredPup.age}</li>
+              <li class="puppyNames">Email: {featuredPup.email}</li>
+            </ul>
+          </div>
+        }
         {
           puppies.map((puppy) => {
             return (
-            <p onClick={()=>{console.log("puppy id: ", puppy.id)}} key={puppy.id}>
+            <h3 class="puppyNames" onClick={()=>{ setFeatPupId(puppy.id)}} key={puppy.id}>
               {puppy.name}
-            </p>
+            </h3>
           );
         })}
       </div>
